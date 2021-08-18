@@ -1,0 +1,181 @@
+/*nav bar*/
+
+body {
+    font-style: 16px;
+    color: black;
+}
+
+.wrapper {
+    width: 100%;
+}
+
+.container {
+    max-width: 1170px;
+    margin: 0 auto;
+}
+
+.header {
+    width: 100%;
+    display: inline-block;
+    height: 70px;
+    box-shadow: 7px 12px 29px 0 rgb(128, 128, 128, 0.11);
+}
+
+.navlogo img {
+    float: left;
+    margin-top: 5px;
+    max-height: 55px;
+    cursor: pointer;
+}
+
+.navroute a {
+    float: right;
+    padding: 14px 16px;
+    margin-top: 8px;
+    text-decoration: none;
+    font-size: 20px;
+    font-weight: 500;
+    color: black;
+}
+
+.navroute a:hover {
+    background-color: #f1f1f1;
+}
+
+
+/*content*/
+
+.content,
+.lyrics {
+    display: flex;
+    flex-direction: row;
+}
+
+.lyrics {
+    position: relative;
+    left: 370px;
+    /* right: 520px; */
+    height: 100%;
+}
+
+.buttons {
+    position: fixed;
+    top: 130px;
+    left: 17%;
+    width: 200px;
+    height: 60px;
+}
+
+.detail {
+    position: fixed;
+    left: -30px;
+    margin: 8% 0% 0% 10%;
+    width: 220px;
+    padding: 20px 50px 20px 50px;
+    text-align: left;
+    text-transform: uppercase;
+    font-weight: 600;
+    color: palevioletred;
+}
+
+.detail .title {
+    display: block;
+    margin-left: -18%;
+    width: 210px;
+    font-size: 25px;
+}
+
+.detail .artiste {
+    display: block;
+    margin-left: -18%;
+    width: 200px;
+    font-size: 13px;
+}
+
+.detail img {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    position: relative;
+    left: -15%;
+    width: 195px;
+    margin-bottom: 30px;
+}
+
+.original,
+.translated {
+    position: relative;
+    left: 60px;
+    width: 350px;
+    height: 100%;
+    margin: 50px 30px 50px 0px;
+}
+
+.original p,
+.translated p {
+    white-space: pre-line;
+}
+
+.translated {
+    margin-top: 5%;
+    margin-left: 30px;
+}
+
+.translated .values {
+    width: 300px;
+    height: 40px;
+    border: none;
+    font-size: 22px;
+    font-weight: 600;
+}
+
+
+/*update modal*/
+
+.genre-select,
+.genre-text {
+    float: left;
+}
+
+
+/*delete modal*/
+
+.modal-container {
+    padding: 20px;
+    text-align: center;
+    background-color: #f1f1f1;
+}
+
+.modal-body2 {
+    padding: 20px;
+}
+
+.modal-body2 p,
+h1 {
+    text-align: center;
+}
+
+.del {
+    width: 50%;
+    float: left;
+    flex: inline-block;
+}
+
+
+/*media queries*/
+
+@media screen and (min-width: 1400px) {
+    .buttons {
+        left: 16%;
+    }
+    .lyrics {
+        margin-left: 4%;
+    }
+    .original,
+    .translated {
+        width: 400px;
+    }
+    .translated {
+        margin-top: 4%;
+    }
+}

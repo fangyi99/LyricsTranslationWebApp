@@ -1,0 +1,157 @@
+/*nav bar*/
+
+body {
+    font-style: 16px;
+    color: black;
+}
+
+.wrapper {
+    width: 100%;
+}
+
+.container {
+    max-width: 1170px;
+    margin: 0 auto;
+}
+
+.header {
+    width: 100%;
+    display: inline-block;
+    height: 70px;
+    box-shadow: 7px 12px 29px 0 rgb(128, 128, 128, 0.11);
+}
+
+.navlogo img {
+    float: left;
+    margin-top: 5px;
+    max-height: 55px;
+    cursor: pointer;
+}
+
+
+/*form*/
+
+input.form-control,
+input.form-control:focus {
+    background-color: #868e9c;
+    color: #fff;
+    border: 1px solid #868e9c;
+    width: 120%;
+    position: relative;
+    left: 37%;
+}
+
+input.form-control:focus {
+    box-shadow: none;
+}
+
+button[type=submit].btn {
+    margin-top: 10px;
+    border-radius: 20px;
+    background-color: #04c582;
+    color: #fff;
+    width: 186%;
+    position: relative;
+    left: 28%;
+}
+
+.radioGroup .radio {
+    padding-left: 25px;
+}
+
+label {
+    position: relative;
+    left: 40%;
+}
+
+div.form-group label:not(.text-danger) {
+    color: #868e9c;
+    font-weight: 700;
+}
+
+div.form-group.required>label:first-child:after {
+    content: '*';
+    color: #fff;
+    padding-left: 5px;
+}
+
+#toast-container>div {
+    opacity: 1;
+}
+
+.registerForm {
+    width: 100%;
+}
+
+.wrapper2 {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    justify-content: center;
+    width: 100%;
+    padding: 20px;
+}
+
+.wrapped-div {
+    -webkit-border-radius: 10px 10px 10px 10px;
+    border-radius: 10px 10px 10px 10px;
+    background: #2e3137;
+    padding: 30px;
+    width: 90%;
+    max-width: 450px;
+    position: relative;
+    padding: 0px;
+    -webkit-box-shadow: 0 30px 60px 0 rgba(0, 0, 0, 0.3);
+    box-shadow: 0 30px 60px 0 rgba(0, 0, 0, 0.3);
+}
+
+
+/* Tabs */
+
+.tab-header {
+    text-align: center;
+}
+
+.tab-header h2.active {
+    color: #fff;
+    border-bottom: 4px solid #fff;
+}
+
+.tab-header h2 {
+    text-align: center;
+    font-size: 18px;
+    font-weight: 600;
+    display: inline-block;
+    padding: 30px 40px 10px 40px;
+    cursor: pointer;
+    color: #868e9c;
+    border-bottom: 2px solid #545d6a;
+}
+
+.tab-header h2:focus {
+    outline: none;
+}
+
+form {
+    margin: 0px 16px;
+}
+
+div.form-group input.invalid {
+    border: 1px solid #dc3545;
+}
+
+div.form-group label:first-child {
+    text-transform: uppercase;
+    font-size: 0.9rem;
+}
+
+
+/*media queries*/
+
+@media screen and (max-width: 768px) {
+    button[type=submit].btn {
+        position: relative;
+        left: 35%;
+        width: 120%;
+    }
+}

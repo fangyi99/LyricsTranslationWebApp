@@ -1,0 +1,52 @@
+<!--navbar-->
+<div class="wrapper">
+    <header class="header">
+        <div class="container">
+            <div class="navlogo" [routerLink]="['']"><img [src]="logo"></div>
+            <div class="navroute">
+                <a href="/44355/api/accounts/login" *ngIf="!auth.isLoggedIn()">Login/Register</a>
+                <a href *ngIf="auth.isLoggedIn()" (click)="logout()">Logout</a>
+                <a href="/44382/gateway/accounts/auth.getUser()" *ngIf="auth.isLoggedIn()">Profile</a>
+            </div>
+        </div>
+    </header>
+</div>
+
+<!-- sidebar -->
+<div class="sidebar">
+    <img [src]="profilePic" class="profilePic">
+    <ul class="list-group">
+        <li class="list-group-item d-flex justify-content-between align-items-center" (click)="viewProfile()">
+            <span class="material-icons">person</span> Profile <span class="material-icons">navigate_next</span>
+        </li>
+        <li class="list-group-item d-flex justify-content-between align-items-center" *ngIf="auth.isAuthorised()">
+            <span class="material-icons">people_alt</span> View all users <span class="material-icons">navigate_next</span>
+        </li>
+        <li class="list-group-item d-flex justify-content-between align-items-center" (click)="viewCreatedSongs()">
+            <span class="material-icons">library_music</span> Created Songs <span class="material-icons">navigate_next</span>
+        </li>
+        <li class="disabled list-group-item d-flex justify-content-between align-items-center" *ngIf="!auth.isAuthorised()" disabled>
+            <span class="material-icons">people_alt</span> View all users <span class="material-icons">navigate_next</span>
+        </li>
+    </ul>
+</div>
+
+<!--account listing-->
+<div class="container">
+    <table class="table">
+        <thead>
+            <tr>
+                <th scope="col">Role</th>
+                <th scope="col">Username</th>
+                <th scope="col">Email</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let account of accountList">
+                <td>{{ account.role }}</td>
+                <td>{{ account.username }}</td>
+                <td>{{ account.email }}</td>
+            </tr>
+        </tbody>
+    </table>
+</div>

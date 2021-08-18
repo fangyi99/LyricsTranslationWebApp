@@ -1,0 +1,92 @@
+<!--navbar-->
+<div class="wrapper">
+    <header class="header">
+        <div class="container">
+            <div class="navlogo" [routerLink]="['']"><img [src]="logo"></div>
+            <div class="navroute">
+                <a href="/44355/api/accounts/login" *ngIf="!auth.isLoggedIn()">Login/Register</a>
+                <a href *ngIf="auth.isLoggedIn()" (click)="logout()">Logout</a>
+                <a href="/44382/gateway/accounts/auth.getUser()" *ngIf="auth.isLoggedIn()">Profile</a>
+            </div>
+        </div>
+    </header>
+</div>
+
+<!-- sidebar -->
+<div class="sidebar">
+    <img [src]="profilePic">
+    <ul class="list-group">
+        <li class="list-group-item d-flex justify-content-between align-items-center">
+            <span class="material-icons">person</span> Profile <span class="material-icons">navigate_next</span>
+        </li>
+        <li class="list-group-item d-flex justify-content-between align-items-center" (click)="viewAllAccounts()" *ngIf="auth.isAuthorised()">
+            <span class="material-icons">people_alt</span> View all users <span class="material-icons">navigate_next</span>
+        </li>
+        <li class="list-group-item d-flex justify-content-between align-items-center" (click)="viewCreatedSongs()">
+            <span class="material-icons">library_music</span> Created Songs <span class="material-icons">navigate_next</span>
+        </li>
+        <li class="disabled list-group-item d-flex justify-content-between align-items-center" *ngIf="!auth.isAuthorised()" disabled>
+            <span class="material-icons">people_alt</span> View all users <span class="material-icons">navigate_next</span>
+        </li>
+    </ul>
+</div>
+
+<!-- content -->
+<div class=" profile card">
+
+    <p>Role: {{account.role}}</p>
+    <p>Username: {{account.username}}</p>
+    <p>Email: {{account.email}}</p>
+    <p>Password: {{account.password}}</p>
+
+    <div class="btn-group">
+        <button class="edit" data-target="#updateAccountModal" (click)="onUpdateModal(account)" data-toggle="modal">Edit</button>
+        <button class="delete" data-target="#deleteAccountModal" data-toggle="modal">Delete</button>
+    </div>
+</div>
+
+<!-- Update Song Modal -->
+<div class="modal fade" id="updateAccountModal" tabindex="-1" role="dialog" aria-labelledby="updateAccountModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="updateAccountModalLabel">Update Account</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form [formGroup]="updateAccountForm">
+                    <input type="text" class="form-control mt-3" placeholder="Role" formControlName="role" [attr.disabled]="true">
+                    <input type="text" class="form-control mt-3" placeholder="Username" formControlName="username" [attr.disabled]="true">
+                    <input type="text" class="form-control mt-3" placeholder="Email" formControlName="email">
+                    <label class="text-danger" *ngIf="updateAccountForm.get('email').touched && updateAccountForm.get('email').errors?.email">Invalid
+                        email address.</label>
+                    <input type="text" class="form-control mt-3" placeholder="Password" formControlName="password">
+                    <label class="text-danger" *ngIf="updateAccountForm.get('password').touched && updateAccountForm.get('password').errors?.required">This
+                        field is mandatory.</label>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                <button type="submit" class="btn btn-primary" data-dismiss="modal" [disabled]="!updateAccountForm.valid" (click)="onUpdate()">Save Changes</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Delete Song Modal -->
+<div class="modal fade" id="deleteAccountModal" tabindex="-1" role="dialog" aria-labelledby="deleteAccountModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-body2">
+                <h1 id="updateAccountModalLabel">Delete Account</h1>
+                <p>Are you sure you want to delete your account?</p>
+            </div>
+            <div class="clearfix">
+                <button type="button" class="btn btn-secondary del" data-dismiss="modal">Cancel</button>
+                <button type="submit" class="btn btn-danger del" (click)="onDelete()" data-dismiss="modal">Delete</button>
+            </div>
+        </div>
+    </div>
+</div>

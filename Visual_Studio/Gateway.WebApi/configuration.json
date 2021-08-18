@@ -1,0 +1,81 @@
+{
+  "Routes": [
+    {
+      // Account Service GET all accounts route
+      "DownstreamPathTemplate": "/api/accounts",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 44355
+        }
+      ],
+      // Ocelot gateway GET all accounts route
+      "UpstreamPathTemplate": "/gateway/accounts",
+      "UpstreamHttpMethod": [ "GET" ],
+      "AuthenticationOptions": {
+        "AuthenticationProviderKey": "TestKey",
+        "AllowedScopes": []
+      }
+    },
+
+    {
+      // Account Service GET account by username route
+      "DownstreamPathTemplate": "/api/accounts/{username}",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 44355
+        }
+      ],
+      // Ocelot gateway GET account by username route
+      "UpstreamPathTemplate": "/gateway/accounts/{username}",
+      "UpstreamHttpMethod": [ "GET" ],
+      "AuthenticationOptions": {
+        "AuthenticationProviderKey": "TestKey",
+        "AllowedScopes": []
+      }
+    },
+    {
+      // Song Service POST song route
+      "DownstreamPathTemplate": "/api/songs",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 44366
+        }
+      ],
+      // Ocelot gateway POST song route
+      "UpstreamPathTemplate": "/gateway/songs",
+      "UpstreamHttpMethod": [ "POST" ],
+      "AuthenticationOptions": {
+        "AuthenticationProviderKey": "TestKey",
+        "AllowedScopes": []
+      }
+    },
+
+    {
+      // Song Service PUT & DELETE song route
+      "DownstreamPathTemplate": "/api/songs/{id}",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 44366
+        }
+      ],
+      // Ocelot gateway PUT & DELETE song route
+      "UpstreamPathTemplate": "/gateway/songs/{id}",
+      "UpstreamHttpMethod": [ "PUT", "DELETE" ],
+      "AuthenticationOptions": {
+        "AuthenticationProviderKey": "TestKey",
+        "AllowedScopes": []
+      }
+    }
+  ],
+  "GlobalConfiguration": {
+    "BaseUrl": "http://localhost:44382"
+  }
+} 

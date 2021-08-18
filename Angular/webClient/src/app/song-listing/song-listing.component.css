@@ -1,0 +1,184 @@
+/*nav bar*/
+
+body {
+    font-style: 16px;
+    color: black;
+}
+
+.wrapper {
+    width: 100%;
+}
+
+.container {
+    max-width: 1170px;
+    margin: 0 auto;
+}
+
+.header {
+    width: 100%;
+    display: inline-block;
+    height: 70px;
+    box-shadow: 7px 12px 29px 0 rgb(128, 128, 128, 0.11);
+}
+
+.navlogo img {
+    float: left;
+    margin-top: 5px;
+    max-height: 55px;
+}
+
+.navroute a {
+    float: right;
+    padding: 14px 16px;
+    margin-top: 8px;
+    text-decoration: none;
+    font-size: 20px;
+    font-weight: 500;
+    color: black;
+}
+
+.navroute a:hover {
+    background-color: #f1f1f1;
+}
+
+
+/*cover*/
+
+.cover {
+    min-height: 420px;
+    width: 100%;
+    background: url("/assets/images/cover.jpg");
+    background-repeat: no-repeat;
+    background-size: 100%;
+    background-position: 0 -60px;
+}
+
+.cover h3 {
+    text-align: center;
+    padding: 120px 0px 20px 0px;
+}
+
+.search {
+    position: relative;
+    width: 80%;
+    text-align: center;
+    margin: auto;
+}
+
+.search input[type=text] {
+    padding: 15px;
+    font-size: 17px;
+    border: none;
+    float: left;
+    width: 80%;
+    background: white;
+    border-radius: 5px;
+}
+
+.search input[type=text]:hover {
+    background: #f1f1f1;
+}
+
+.search button {
+    float: left;
+    width: 20%;
+    height: 55px;
+    padding: 10px;
+    background: #2196F3;
+    color: white;
+    font-size: 17px;
+    border: none;
+    border-radius: 5px;
+    /* Prevent double borders */
+    cursor: pointer;
+}
+
+.search button:hover {
+    background: #0b7dda;
+}
+
+.cover .filterbtn {
+    width: 45%;
+    margin: auto;
+    float: center;
+}
+
+.genre {
+    border: none;
+    border-radius: 10px;
+    outline: none;
+    padding: 12px 16px;
+    margin: 20px 10px 20px 10px;
+    background-color: #f1f1f1;
+    cursor: pointer;
+}
+
+.genre:hover {
+    background-color: #ddd;
+}
+
+.genre:focus {
+    background-color: #666;
+    color: white;
+}
+
+
+/*songlist*/
+
+.songlist {
+    margin-bottom: 50px;
+}
+
+.songlist h2 {
+    width: 500px;
+    text-align: center;
+    margin: 100px 0px 50px 0px;
+    margin-left: 45%;
+}
+
+.table {
+    border-collapse: collapse;
+}
+
+.group {
+    width: 70%;
+    position: relative;
+}
+
+.group img {
+    width: 70px;
+    height: 70px;
+    margin-left: 10%;
+    margin-right: 10%;
+}
+
+.songlist .table .btn {
+    float: right;
+    position: relative;
+    bottom: 85px;
+    left: 150px;
+}
+
+.song:hover {
+    background-color: #ddd;
+}
+
+.song td {
+    font-size: 20px;
+    vertical-align: middle;
+}
+
+.table .more {
+    width: 180px;
+    margin-top: 110px;
+    margin-left: 60%;
+    margin-right: 40%;
+}
+
+
+/*update modal*/
+
+.genre-select,
+.genre-text {
+    float: left;
+}

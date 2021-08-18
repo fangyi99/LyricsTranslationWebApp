@@ -1,0 +1,107 @@
+/*nav bar*/
+
+body {
+    font-style: 16px;
+    color: black;
+}
+
+.wrapper {
+    width: 100%;
+}
+
+.container {
+    max-width: 1170px;
+    margin: 0 auto;
+}
+
+.header {
+    width: 100%;
+    display: inline-block;
+    height: 70px;
+    box-shadow: 7px 12px 29px 0 rgb(128, 128, 128, 0.11);
+}
+
+.navlogo img {
+    float: left;
+    margin-top: 5px;
+    max-height: 55px;
+    cursor: pointer;
+}
+
+.navroute a {
+    float: right;
+    padding: 14px 16px;
+    margin-top: 8px;
+    text-decoration: none;
+    font-size: 20px;
+    font-weight: 500;
+    color: black;
+}
+
+.navroute a:hover {
+    background-color: #f1f1f1;
+}
+
+
+/* sidebar */
+
+.sidebar {
+    width: fit-content;
+    float: left;
+    margin-top: 4%;
+    margin-left: 12%;
+    text-align: center;
+}
+
+.sidebar img {
+    max-width: 250px;
+    border-radius: 10px;
+    padding-bottom: 30px;
+}
+
+li {
+    width: 250px;
+}
+
+li:hover {
+    background-color: #ddd;
+    cursor: pointer;
+}
+
+li span {
+    font-size: 35px;
+}
+
+
+/*account listing */
+
+.table {
+    width: 55%;
+    float: right;
+    margin-top: 5%;
+}
+
+
+/*media queries*/
+
+@media screen and (max-width: 770px) {
+    ul {
+        float: right;
+        margin-left: 50px;
+    }
+    .table {
+        margin: auto;
+        margin-top: 10px;
+        width: 90%;
+    }
+}
+
+@media screen and (max-width: 590px) {
+    ul {
+        position: relative;
+        right: 25%;
+    }
+    .table {
+        margin-top: 8%;
+    }
+}

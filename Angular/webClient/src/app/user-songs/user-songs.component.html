@@ -1,0 +1,168 @@
+<!--navbar-->
+<div class="wrapper">
+    <header class="header">
+        <div class="container">
+            <div class="navlogo" [routerLink]="['']"><img [src]="logo"></div>
+            <div class="navroute">
+                <a href="/44355/api/accounts/login" *ngIf="!auth.isLoggedIn()">Login/Register</a>
+                <a href *ngIf="auth.isLoggedIn()" (click)="logout()">Logout</a>
+                <a href="/44382/gateway/accounts/auth.getUser()" *ngIf="auth.isLoggedIn()">Profile</a>
+            </div>
+        </div>
+    </header>
+</div>
+
+<!-- sidebar -->
+<div class="sidebar">
+    <img [src]="profilePic">
+    <ul class="list-group">
+        <li class="list-group-item d-flex justify-content-between align-items-center" (click)="viewProfile()">
+            <span class="material-icons">person</span> Profile <span class="material-icons">navigate_next</span>
+        </li>
+        <li class="list-group-item d-flex justify-content-between align-items-center" (click)="viewAllAccounts()" *ngIf="auth.isAuthorised()">
+            <span class="material-icons">people_alt</span> View all users <span class="material-icons">navigate_next</span>
+        </li>
+        <li class="list-group-item d-flex justify-content-between align-items-center">
+            <span class="material-icons">library_music</span> Created Songs <span class="material-icons">navigate_next</span>
+        </li>
+        <li class="disabled list-group-item d-flex justify-content-between align-items-center" *ngIf="!auth.isAuthorised()" disabled>
+            <span class="material-icons">people_alt</span> View all users <span class="material-icons">navigate_next</span>
+        </li>
+    </ul>
+</div>
+
+<!--song listing-->
+<div class="container">
+    <table class="table">
+        <thead>
+            <tr>
+                <th scope="col">S/N</th>
+                <th scope="col">Title</th>
+                <th scope="col">Artiste</th>
+                <th scope="col"> <button class="btn btn-success" style="width:120px;" data-target="#newSongModal" data-toggle="modal">Create Song</button></th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let song of songList; let i = index">
+                <td>{{ i+1 }}</td>
+                <td>{{ song.title }}</td>
+                <td>{{ song.artiste }}</td>
+                <td>
+                    <button class="btn btn-info" data-target="#updateSongModal" (click)="onUpdateModal(song)" data-toggle="modal"><span class="material-icons">create</span></button>
+                    <button class="btn btn-danger ml-2" data-target="#deleteSongModal" (click)="onDeleteModal(song)" data-toggle="modal"><span class="material-icons">delete</span></button>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+
+<!--New Song Modal-->
+<div class="modal fade" id="newSongModal" tabindex="-1" role="dialog" aria-labelledby="newSongModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="newSongModalLabel">Create Song</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form [formGroup]="newSongForm">
+                    <div class="genre-container">
+                        <select class="form-control form-group col-md-4 genre-select" onchange="document.getElementById('displayValue').value=this.options[this.selectedIndex].text; document.getElementById('idValue').value=this.options[this.selectedIndex].value;">
+                            <option>--</option>
+                            <option value="English">English</option>
+                            <option value="Chinese">Chinese</option>
+                            <option value="Korean">Korean</option>
+                            <option value="Japanese">Japanese</option>
+                            <option value="Others">Others</option>
+                        </select>
+                        <input type="text" formControlName="genre" id="displayValue" placeholder="Genre" onfocus="this.select()" class="form-control form-group col-md-8 genre-text">
+                        <label class="text-danger" *ngIf="newSongForm.get('genre').touched && newSongForm.get('genre').errors?.required">This
+                            field is mandatory.</label>
+                        <input name="idValue" id="idValue" type="hidden">
+                    </div>
+                    <input type="text" class="form-control mt-3" placeholder="Cover Art" formControlName="coverArt">
+                    <input type="text" class="form-control mt-3" placeholder="Title" formControlName="title">
+                    <label class="text-danger" *ngIf="newSongForm.get('title').touched && newSongForm.get('title').errors?.required">This
+                        field is mandatory.</label>
+                    <input type="text" class="form-control mt-3" placeholder="Artiste" formControlName="artiste">
+                    <label class="text-danger" *ngIf="newSongForm.get('artiste').touched && newSongForm.get('artiste').errors?.required">This
+                        field is mandatory.</label>
+                    <textarea class="form-control mt-3" placeholder="Lyrics" formControlName="lyrics" style="height:150px;"></textarea>
+                    <label class="text-danger" *ngIf="newSongForm.get('lyrics').touched && newSongForm.get('lyrics').errors?.required">This
+                        field is mandatory.</label>
+                </form>
+
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Camcel</button>
+                <button type="submit" class="btn btn-primary" data-dismiss="modal" [disabled]="!newSongForm.valid" (click)="onAdd()">Save Changes</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<!-- Update Song Modal -->
+<div class="modal fade" id="updateSongModal" tabindex="-1" role="dialog" aria-labelledby="updateSongModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="updateSongModalLabel">Update Song</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form [formGroup]="updateSongForm">
+                    <div class="genre-container">
+                        <select class="form-control form-group col-md-4 genre-select" onchange="document.getElementById('displayValue').value=this.options[this.selectedIndex].text; document.getElementById('idValue').value=this.options[this.selectedIndex].value;">
+                            <option>--</option>
+                            <option value="English">English</option>
+                            <option value="Chinese">Chinese</option>
+                            <option value="Korean">Korean</option>
+                            <option value="Japanese">Japanese</option>
+                            <option value="Others">Others</option>
+                        </select>
+                        <input type="text" formControlName="genre" id="displayValue" placeholder="Genre" onfocus="this.select()" class="form-control form-group col-md-8 genre-text">
+                        <label class="text-danger" *ngIf="updateSongForm.get('genre').touched && updateSongForm.get('genre').errors?.required">This
+                            field is mandatory.</label>
+                        <input name="idValue" id="idValue" type="hidden">
+                    </div>
+                    <input type="text" class="form-control mt-3" placeholder="Cover Art" formControlName="coverArt">
+                    <input type="text" class="form-control mt-3" placeholder="Title" formControlName="title">
+                    <label class="text-danger" *ngIf="updateSongForm.get('title').touched && updateSongForm.get('title').errors?.required">This
+                        field is mandatory.</label>
+                    <input type="text" class="form-control mt-3" placeholder="Artiste" formControlName="artiste">
+                    <label class="text-danger" *ngIf="updateSongForm.get('artiste').touched && updateSongForm.get('artiste').errors?.required">This
+                        field is mandatory.</label>
+                    <textarea class="form-control mt-3" placeholder="Lyrics" formControlName="lyrics" style="height:150px;"></textarea>
+                    <label class="text-danger" *ngIf="updateSongForm.get('lyrics').touched && updateSongForm.get('lyrics').errors?.required">This
+                        field is mandatory.</label>
+                </form>
+
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                <button type="submit" class="btn btn-primary" data-dismiss="modal" [disabled]="!updateSongForm.valid" (click)="onUpdate()">Save Changes</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Delete Song Modal -->
+<div class="modal fade" id="deleteSongModal" tabindex="-1" role="dialog" aria-labelledby="deleteSongModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-body2">
+                <h1 id="updateSongModalLabel">Delete Song</h1>
+                <p>Are you sure you want to delete this song?</p>
+            </div>
+            <div class="clearfix">
+                <button type="button" class="btn btn-secondary del" data-dismiss="modal">Cancel</button>
+                <button type="submit" class="btn btn-danger del" data-dismiss="modal" (click)="onDelete()">Delete</button>
+            </div>
+        </div>
+    </div>
+</div>
